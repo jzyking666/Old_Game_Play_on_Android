@@ -1,0 +1,32 @@
+# Gradle
+.gradle/
+.gradle-user-home/
+build/
+*/build/
+.kotlin/
+
+# Local configuration
+local.properties
+keystore.properties
+*.jks
+*.keystore
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Android artifacts
+captures/
+output.json
+*.apk
+*.aab
+*.ap_
+*.hprof
+.cxx/
+.externalNativeBuild/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
