@@ -1,102 +1,62 @@
 # RetroArcade
 
-[English](./README.md) | [简体中文](./README.zh-CN.md)
+[English](./README.md) | [Chinese](./README.zh-CN.md)
 
-RetroArcade is an Android project built around a simple idea: bring back the instant joy of old-school mini games.
+RetroArcade is a small Android collection of retro games I grew up with.
 
-It is not trying to be a large modern mobile game. Instead, it focuses on the kind of games that launch fast, explain themselves in seconds, and stay fun because their rules are clean and direct.
-
-The current first playable version already includes 3 games:
-
-- `Classic Snake`
-- `Offline Dino`
-- `Ball Downshaft`
-
-## Highlights
-
-- `Clear retro identity`: the project is intentionally inspired by keypad-phone games, Flash-era web games, and lightweight arcade classics.
-- `Instant play`: offline, single-player, simple rules, fast feedback.
-- `Expandable structure`: new games can be added without rewriting the whole app.
-- `Open-source friendly`: gameplay logic is separated into clear `engine` and `ui` layers for easier maintenance.
+The idea is simple: no ads, no stamina, no account system, no complicated onboarding. Just open the app and start playing.
 
 ## Current Games
 
-### 1. Classic Snake
+- `Classic Snake`
+  A straightforward old-school Snake with simple rules and multiple control styles.
 
-The pure classic Snake formula.
+- `Offline Dino`
+  A Chrome Dino inspired runner with jump, duck, birds, night mode, and a visual style that stays close to the original feel.
 
-- Eat food to grow
-- Crash into walls or yourself to lose
-- Difficulty selection
-- D-pad and swipe controls
-- Multiple visual themes
+- `Ball Downshaft`
+  A survival descent game inspired by old Flash-era "downshaft" style games.
 
-### 2. Offline Dino
+- `Classic Tetris`
+  A stripped-back classic Tetris with no hold, no ghost piece, and no hard drop.
 
-A Chromium offline runner inspired recreation.
+- `Classic Minesweeper`
+  A Windows XP style minesweeper with classic difficulties, flagging, and quick open support.
 
-- Classic monochrome visual direction
-- Jump and duck controls
-- High / mid / low flying birds
-- Night mode, score display, and game-over presentation
-- Chromium official sprite sheet used as the visual reference asset
+## What This Project Is Trying To Be
 
-### 3. Ball Downshaft
+This is not meant to become a huge "feature-rich" game app.
 
-Inspired by early “Downshaft / falling ball platform” style games.
+The goal is to build a clean retro game box around games that:
 
-- Move the ball left and right
-- Survive by landing on safe platforms
-- Normal platforms are safe, spike platforms deal damage
-- Heart pickups restore health when you are below max health
-- Difficulty rises over time, but the pacing is tuned for longer runs
+- start fast
+- feel familiar right away
+- are simple to understand
+- still feel good after dozens of runs
 
 ## Tech Stack
 
-- `Kotlin`
-- `Jetpack Compose`
-- `Navigation Compose`
-- `ViewModel`
-- `DataStore`
-- Single-activity architecture
+- Kotlin
+- Jetpack Compose
+- Navigation Compose
+- ViewModel
+- DataStore
 
-## Project Structure
+## Build And Run
 
-Main source folders:
-
-- `app/src/main/java/com/retro/arcade/app`
-- `app/src/main/java/com/retro/arcade/core`
-- `app/src/main/java/com/retro/arcade/feature`
-
-Game features are split into:
-
-- `feature/snake`
-- `feature/dino`
-- `feature/downshaft`
-
-Each game is generally organized into:
-
-- `model`: state and configuration
-- `engine`: pure gameplay logic
-- `ui`: Compose screens and rendering
-
-## Build Locally
-
-### Requirements
+Requirements:
 
 - Android Studio
-- JDK `17+`
-- Android SDK `34`
+- JDK 17+
+- Android SDK 34
 
-### Run in Android Studio
+Run in Android Studio:
 
-1. Open the project folder in Android Studio
-2. Wait for `Gradle Sync` to finish
-3. Run the `app` module on an emulator or a real device
+1. Open this folder in Android Studio
+2. Let Gradle Sync finish
+3. Run the `app` module on a device or emulator
 
-### Gradle Commands
-
-macOS / Linux:
+Gradle:
 
 ```bash
 ./gradlew assembleDebug
@@ -108,36 +68,49 @@ Windows:
 .\gradlew.bat assembleDebug
 ```
 
-## Current Status
+## Project Structure
 
-This repository is the first playable prototype of the project. The current version already includes:
+Main source folders:
 
-- Home screen and game navigation
-- First playable versions of 3 retro mini games
-- Best-score persistence
-- Basic gameplay engine tests
+- `app/src/main/java/com/retro/arcade/app`
+- `app/src/main/java/com/retro/arcade/core`
+- `app/src/main/java/com/retro/arcade/feature`
 
-Planned future improvements may include:
+Game features:
 
-- Sound and vibration feedback
-- More retro games
-- More complete localization
-- Broader test coverage
-- GitHub showcase screenshots and release notes
+- `feature/snake`
+- `feature/dino`
+- `feature/downshaft`
+- `feature/tetris`
+- `feature/minesweeper`
 
-## Design Notes
+Each game is kept fairly separate so rules, rendering, and future fixes stay manageable.
 
-The original direction document is here:
+## Current State
 
-- `docs/retro-arcade-design.md`
+This is the second playable version of the project.
 
-## Assets and Attribution
+What is already in:
+
+- 5 playable games
+- home navigation between games
+- saved best scores / best time
+- basic engine tests for core rules
+
+What I may keep improving:
+
+- sound and vibration
+- more polish on visuals and controls
+- more retro games
+- better test coverage
+
+## Assets And Attribution
 
 - `Offline Dino` uses Chromium's offline runner sprite sheet as a visual reference asset
-- See `NOTICE.md` for attribution details
+- See [NOTICE.md](./NOTICE.md) for attribution details
 
-## Why This Project Exists
+## Why I'm Open-Sourcing It
 
-If you miss the kind of games that have no ads, no stamina systems, no long onboarding, and no friction between opening the app and actually playing, this project is built exactly for that feeling.
+Because a lot of these small games are worth keeping around.
 
-It is not just a single-game demo. It is the foundation of a growing retro game box.
+They are simple, direct, and fun in a way that still holds up. This project is my way of collecting that feeling in one app.

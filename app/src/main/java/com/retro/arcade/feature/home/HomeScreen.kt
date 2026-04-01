@@ -37,9 +37,13 @@ fun HomeScreen(
     bestSnakeScore: Int,
     bestDinoScore: Int,
     bestDownshaftScore: Int,
+    bestTetrisScore: Int,
+    bestMinesweeperTime: Int,
     onOpenSnake: () -> Unit,
     onOpenDino: () -> Unit,
     onOpenDownshaft: () -> Unit,
+    onOpenTetris: () -> Unit,
+    onOpenMinesweeper: () -> Unit,
     onOpenSettings: () -> Unit
 ) {
     Scaffold(
@@ -72,7 +76,7 @@ fun HomeScreen(
                     style = MaterialTheme.typography.headlineMedium
                 )
                 Text(
-                    text = "Classic Snake, Offline Dino, and a fast-paced downshaft ball run are all playable here.",
+                    text = "Snake, Dino, Downshaft, Tetris, and now classic XP-style Minesweeper all live in the same retro game box.",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.9f)
                 )
@@ -109,6 +113,12 @@ fun HomeScreen(
                             color = MaterialTheme.colorScheme.primary
                         )
                     }
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                    verticalAlignment = Alignment.Top
+                ) {
                     Column(
                         modifier = Modifier.weight(1f),
                         verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -121,6 +131,44 @@ fun HomeScreen(
                             text = bestDownshaftScore.toString().padStart(4, '0'),
                             style = MaterialTheme.typography.headlineLarge,
                             color = MaterialTheme.colorScheme.tertiary
+                        )
+                    }
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "Tetris Best",
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                        Text(
+                            text = bestTetrisScore.toString(),
+                            style = MaterialTheme.typography.headlineLarge,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                    }
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                    verticalAlignment = Alignment.Top
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "Sweep Best",
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                        Text(
+                            text = if (bestMinesweeperTime > 0) {
+                                "${bestMinesweeperTime}s"
+                            } else {
+                                "--"
+                            },
+                            style = MaterialTheme.typography.headlineLarge,
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
@@ -230,6 +278,78 @@ fun HomeScreen(
                         onClick = onOpenDownshaft
                     ) {
                         Text("Play Downshaft")
+                    }
+                }
+            }
+
+            ElevatedCard {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.SportsEsports,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                        Text(
+                            text = "Classic Tetris",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Text(
+                        text = "The raw essentials only: stack, rotate, clear lines, and survive without modern helpers.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = onOpenTetris
+                    ) {
+                        Text("Play Tetris")
+                    }
+                }
+            }
+
+            ElevatedCard {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.SportsEsports,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Text(
+                            text = "Classic Minesweeper",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Text(
+                        text = "Windows XP style logic and layout: reveal cells, mark flags, count numbers, and chase the fastest clear time.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = onOpenMinesweeper
+                    ) {
+                        Text("Play Minesweeper")
                     }
                 }
             }

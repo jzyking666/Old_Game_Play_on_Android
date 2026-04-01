@@ -13,18 +13,22 @@ import com.retro.arcade.core.datastore.UiPreferences
 import com.retro.arcade.feature.downshaft.ui.DownshaftGameScreen
 import com.retro.arcade.feature.dino.ui.DinoGameScreen
 import com.retro.arcade.feature.home.HomeScreen
+import com.retro.arcade.feature.minesweeper.ui.MinesweeperGameScreen
 import com.retro.arcade.feature.settings.SettingsScreen
 import com.retro.arcade.feature.snake.model.SnakeControlMode
 import com.retro.arcade.feature.snake.model.SnakeDifficulty
 import com.retro.arcade.feature.snake.model.SnakePalette
 import com.retro.arcade.feature.snake.ui.SnakeGameScreen
 import com.retro.arcade.feature.snake.ui.SnakeSetupScreen
+import com.retro.arcade.feature.tetris.ui.TetrisGameScreen
 
 object AppRoute {
     const val Home = "home"
     const val Settings = "settings"
     const val DinoGame = "dino/game"
     const val DownshaftGame = "downshaft/game"
+    const val TetrisGame = "tetris/game"
+    const val MinesweeperGame = "minesweeper/game"
     const val SnakeSetup = "snake/setup"
     const val SnakeGamePattern = "snake/game/{difficulty}/{controlMode}/{palette}"
 
@@ -54,9 +58,13 @@ fun RetroArcadeNavHost(
                 bestSnakeScore = preferences.bestSnakeScore,
                 bestDinoScore = preferences.bestDinoScore,
                 bestDownshaftScore = preferences.bestDownshaftScore,
+                bestTetrisScore = preferences.bestTetrisScore,
+                bestMinesweeperTime = preferences.bestMinesweeperTime,
                 onOpenSnake = { navController.navigate(AppRoute.SnakeSetup) },
                 onOpenDino = { navController.navigate(AppRoute.DinoGame) },
                 onOpenDownshaft = { navController.navigate(AppRoute.DownshaftGame) },
+                onOpenTetris = { navController.navigate(AppRoute.TetrisGame) },
+                onOpenMinesweeper = { navController.navigate(AppRoute.MinesweeperGame) },
                 onOpenSettings = { navController.navigate(AppRoute.Settings) }
             )
         }
@@ -98,6 +106,26 @@ fun RetroArcadeNavHost(
                 onBack = { navController.navigateUp() },
                 onPersistBestScore = { score ->
                     preferencesRepository.updateBestDownshaftScore(score)
+                }
+            )
+        }
+
+        composable(AppRoute.TetrisGame) {
+            TetrisGameScreen(
+                bestScore = preferences.bestTetrisScore,
+                onBack = { navController.navigateUp() },
+                onPersistBestScore = { score ->
+                    preferencesRepository.updateBestTetrisScore(score)
+                }
+            )
+        }
+
+        composable(AppRoute.MinesweeperGame) {
+            MinesweeperGameScreen(
+                bestTimeSeconds = preferences.bestMinesweeperTime,
+                onBack = { navController.navigateUp() },
+                onPersistBestTime = { seconds ->
+                    preferencesRepository.updateBestMinesweeperTime(seconds)
                 }
             )
         }

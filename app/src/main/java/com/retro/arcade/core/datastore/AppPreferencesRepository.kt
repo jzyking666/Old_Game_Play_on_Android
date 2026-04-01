@@ -26,7 +26,9 @@ data class UiPreferences(
     val vibrationEnabled: Boolean = true,
     val bestSnakeScore: Int = 0,
     val bestDinoScore: Int = 0,
-    val bestDownshaftScore: Int = 0
+    val bestDownshaftScore: Int = 0,
+    val bestTetrisScore: Int = 0,
+    val bestMinesweeperTime: Int = 0
 )
 
 class AppPreferencesRepository(private val context: Context) {
@@ -39,6 +41,8 @@ class AppPreferencesRepository(private val context: Context) {
         val BestSnakeScore = intPreferencesKey("best_snake_score")
         val BestDinoScore = intPreferencesKey("best_dino_score")
         val BestDownshaftScore = intPreferencesKey("best_downshaft_score")
+        val BestTetrisScore = intPreferencesKey("best_tetris_score")
+        val BestMinesweeperTime = intPreferencesKey("best_minesweeper_time")
     }
 
     val preferences: Flow<UiPreferences> = context.dataStore.data.map { prefs ->
@@ -50,7 +54,9 @@ class AppPreferencesRepository(private val context: Context) {
             vibrationEnabled = prefs[Keys.VibrationEnabled] ?: true,
             bestSnakeScore = prefs[Keys.BestSnakeScore] ?: 0,
             bestDinoScore = prefs[Keys.BestDinoScore] ?: 0,
-            bestDownshaftScore = prefs[Keys.BestDownshaftScore] ?: 0
+            bestDownshaftScore = prefs[Keys.BestDownshaftScore] ?: 0,
+            bestTetrisScore = prefs[Keys.BestTetrisScore] ?: 0,
+            bestMinesweeperTime = prefs[Keys.BestMinesweeperTime] ?: 0
         )
     }
 
@@ -107,6 +113,24 @@ class AppPreferencesRepository(private val context: Context) {
             val currentBest = prefs[Keys.BestDownshaftScore] ?: 0
             if (score > currentBest) {
                 prefs[Keys.BestDownshaftScore] = score
+            }
+        }
+    }
+
+    suspend fun updateBestTetrisScore(score: Int) {
+        context.dataStore.edit { prefs ->
+            val currentBest = prefs[Keys.BestTetrisScore] ?: 0
+            if (score > currentBest) {
+                prefs[Keys.BestTetrisScore] = score
+            }
+        }
+    }
+
+    suspend fun updateBestMinesweeperTime(seconds: Int) {
+        context.dataStore.edit { prefs ->
+            val currentBest = prefs[Keys.BestMinesweeperTime] ?: 0
+            if (seconds > 0 && (currentBest == 0 || seconds < currentBest)) {
+                prefs[Keys.BestMinesweeperTime] = seconds
             }
         }
     }

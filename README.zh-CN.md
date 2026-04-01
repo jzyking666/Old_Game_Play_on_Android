@@ -1,102 +1,64 @@
 # RetroArcade
 
-[English](./README.md) | [简体中文](./README.zh-CN.md)
+[English](./README.md) | [中文](./README.zh-CN.md)
 
-RetroArcade 是一个围绕“怀旧小游戏”方向构建的 Android 项目。
+RetroArcade 是一个把童年怀旧小游戏收进 Android 手机上的小项目。
 
-它想做的不是复杂的大型现代手游，而是把那种打开就能玩、几秒钟就能理解规则、靠纯粹玩法让人停不下来的老式小游戏重新带回手机里。
-
-当前第一版已经可以直接游玩 3 款游戏：
-
-- `Classic Snake`
-- `Offline Dino`
-- `Ball Downshaft`
-
-## 项目亮点
-
-- `怀旧气质明确`：整体方向就是按键机时代、Flash 时代、小网页小游戏时代的轻量快乐。
-- `打开即玩`：单机离线、规则简单、反馈直接。
-- `持续扩展`：项目结构已经为后续新增游戏预留好空间。
-- `适合开源维护`：玩法逻辑拆分成清晰的 `engine` 与 `ui` 层，方便后续维护和继续迭代。
+这个项目的想法很简单：没有广告、没有体力、没有账号系统，也没有复杂的新手引导。打开应用，直接开始玩。
 
 ## 当前游戏
 
-### 1. Classic Snake
+- `Classic Snake`
+  最朴素的经典贪吃蛇，规则简单，支持不同操作方式。
 
-最经典的贪吃蛇玩法。
+- `Offline Dino`
+  参考 Chrome 小恐龙做的跑酷小游戏，包含跳跃、下蹲、飞鸟和夜间切换。
 
-- 吃到食物就变长
-- 撞墙或撞到自己就失败
-- 支持难度选择
-- 支持方向键和滑动操作
-- 支持多种主题风格
+- `Ball Downshaft`
+  灵感来自早期 Flash 时代“下100层”一类小游戏的下落求生玩法。
 
-### 2. Offline Dino
+- `Classic Tetris`
+  保留经典规则的俄罗斯方块，没有 Hold、没有 Ghost Piece、没有 Hard Drop。
 
-参考 Chromium 离线小恐龙制作的还原版。
+- `Classic Minesweeper`
+  参考 Windows XP 风格制作的经典扫雷。
 
-- 经典黑白灰视觉方向
-- 支持跳跃和下蹲
-- 包含高空 / 中空 / 低空飞鸟
-- 有夜间切换、分数显示和结算呈现
-- 使用 Chromium 官方 sprite sheet 作为视觉参考素材
+## 这个项目想做成什么
 
-### 3. Ball Downshaft
+它不是一个追求“大而全”的手游项目。
 
-灵感来自早期“下100层 / 小球平台下落”一类老游戏。
+我更想做的是一个真正像“游戏盒”一样的东西，里面收着一些：
 
-- 控制小球左右移动
-- 在平台之间不断下落求生
-- 普通平台安全，刺平台会扣血
-- 心形血包在生命未满时可以回血
-- 难度会逐渐提升，但节奏已经做过放缓调整，更适合连续游玩
+- 打开就能玩
+- 上手不费劲
+- 规则很直接
+- 玩很多次也不会腻
+
+的老式小游戏。
 
 ## 技术栈
 
-- `Kotlin`
-- `Jetpack Compose`
-- `Navigation Compose`
-- `ViewModel`
-- `DataStore`
-- 单 Activity 架构
+- Kotlin
+- Jetpack Compose
+- Navigation Compose
+- ViewModel
+- DataStore
 
-## 项目结构
+## 构建与运行
 
-主要代码目录：
-
-- `app/src/main/java/com/retro/arcade/app`
-- `app/src/main/java/com/retro/arcade/core`
-- `app/src/main/java/com/retro/arcade/feature`
-
-游戏功能拆分为：
-
-- `feature/snake`
-- `feature/dino`
-- `feature/downshaft`
-
-每个游戏基本按以下结构组织：
-
-- `model`：状态与配置
-- `engine`：纯玩法逻辑
-- `ui`：Compose 页面与绘制
-
-## 本地构建
-
-### 环境要求
+环境要求：
 
 - Android Studio
-- JDK `17+`
-- Android SDK `34`
+- JDK 17+
+- Android SDK 34
 
-### 在 Android Studio 中运行
+在 Android Studio 中运行：
 
-1. 用 Android Studio 打开项目目录
-2. 等待 `Gradle Sync` 完成
+1. 用 Android Studio 打开当前目录
+2. 等待 Gradle Sync 完成
 3. 运行 `app` 模块到模拟器或真机
 
-### Gradle 命令
-
-macOS / Linux:
+Gradle 命令：
 
 ```bash
 ./gradlew assembleDebug
@@ -108,36 +70,49 @@ Windows:
 .\gradlew.bat assembleDebug
 ```
 
+## 项目结构
+
+主要代码目录：
+
+- `app/src/main/java/com/retro/arcade/app`
+- `app/src/main/java/com/retro/arcade/core`
+- `app/src/main/java/com/retro/arcade/feature`
+
+当前游戏模块：
+
+- `feature/snake`
+- `feature/dino`
+- `feature/downshaft`
+- `feature/tetris`
+- `feature/minesweeper`
+
+每个游戏尽量独立组织，方便后续继续改玩法、修 bug、加新游戏。
+
 ## 当前状态
 
-这个仓库现在是项目的第一版可玩原型，已经完成：
+现在这是项目的第二个可玩版本。
 
-- 首页与游戏导航
-- 3 款怀旧小游戏的首个可玩版本
-- 最高分持久化
-- 基础玩法引擎测试
+已经完成的内容：
 
-后续可以继续补充：
+- 5 款可玩的小游戏
+- 首页统一入口
+- 最佳分数 / 最佳时间保存
+- 一些核心规则的基础测试
 
-- 音效和振动反馈
+后面可能会继续做：
+
+- 音效和振动
+- 视觉和操作细节打磨
 - 更多怀旧小游戏
-- 更完整的多语言支持
-- 更全面的测试覆盖
-- GitHub 展示截图和版本发布说明
-
-## 设计文档
-
-项目最初的方向设计稿见：
-
-- `docs/retro-arcade-design.md`
+- 更完整的测试覆盖
 
 ## 素材与说明
 
-- `Offline Dino` 使用了 Chromium 的离线小恐龙 sprite sheet 作为视觉参考素材
-- 相关署名说明见 `NOTICE.md`
+- `Offline Dino` 使用了 Chromium 离线小恐龙的 sprite sheet 作为视觉参考素材
+- 相关说明见 [NOTICE.md](./NOTICE.md)
 
-## 为什么做这个项目
+## 为什么开源
 
-如果你也怀念那种没有广告、没有体力、没有复杂教程，打开之后立刻就能开始玩的小游戏体验，这个项目就是为这种感觉而做的。
+因为这些小游戏很值得留下来。
 
-它不是一个单一游戏 Demo，而是一个可以持续扩展的“怀旧游戏盒”基础版本。
+它们简单、直接、耐玩，而且很多年后再玩，依然有那种很纯粹的乐趣。这个项目就是我把这种感觉重新整理到一起的一种方式。
